@@ -4,23 +4,19 @@ namespace Shapes
 {
     abstract class Polygon
     {
-        protected uint sides;
+        protected uint sides { get; }
         public abstract float area();
         public abstract float perimeter();
+        public override string ToString() => "Area: " + area() + ", Perimeter: " + perimeter();
+        
 
-        public Polygon(uint s)
-        {
-            sides = s;
-        }
+        public Polygon(uint s) => sides = s;
     }
 
     class Square: Polygon
     {
         private uint sideLength;
-        public Square(uint l) : base(4)
-        {
-            sideLength = l;
-        }
+        public Square(uint l) : base(4) => sideLength = l;
         public override float area()
         {
             return sideLength * sideLength;
@@ -37,9 +33,10 @@ namespace Shapes
         private uint width;
         public Rectangle(uint w, uint h) : base(4)
         {
-            height = h;
             width = w;
+            height = h;
         }
+
         public override float area()
         {
             return this.width * this.height;
@@ -80,10 +77,7 @@ namespace Shapes
     class Equilateral : Triangle
     {
         private uint length;
-        public Equilateral(uint len)
-        {
-            length = len;
-        }
+        public Equilateral(uint l) => length = l;
         public override float area()
         {
             float floor = length / 2f;
@@ -94,21 +88,19 @@ namespace Shapes
         {
             return base.sides * length;
         }
-
     }    
-
     class Program
     {
         static void Main(string[] args)
         {
             Square square = new Square(5);
-            Console.WriteLine("Square: area = {0}, perimeter = {1}.", square.area(), square.perimeter());
+            Console.WriteLine($"{square}");
             Rectangle rectangle = new Rectangle(3, 6);
-            Console.WriteLine("Rectangle: area = {0}, perimeter = {1}.", rectangle.area(), rectangle.perimeter());
+            Console.WriteLine($"{rectangle}");
             Equilateral eqTri = new Equilateral(4);
-            Console.WriteLine("EquilateralTriangle: Area = {0}, Perimeter = {1}.", eqTri.area(), eqTri.perimeter());
+            Console.WriteLine($"{eqTri}");
             Right rTri = new Right(3, 4, 5);
-            Console.WriteLine("RightTriangle: Area = {0}, Perimeter = {1}.", rTri.area(), rTri.perimeter());
+            Console.WriteLine($"{rTri}");
         }
     }
 }
